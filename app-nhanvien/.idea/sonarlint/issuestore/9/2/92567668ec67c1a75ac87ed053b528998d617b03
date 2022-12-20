@@ -1,0 +1,12 @@
+
+E
+java:S5411""*Use the primitive boolean expression here.(Á˜Ú¨ýÿÿÿÿ
+R
+java:S4973"<Strings and Boxed types should be compared using "equals()".(ã¯ÙÚ
+N
+java:S1854'"8Remove this useless assignment to local variable "form".(’³Þ
+?
+java:S1481'")Remove this unused "form" local variable.(’³Þ
+Z	java:S106+"9Replace this use of System.out or System.err by a logger.(Ú§ÈÖúÿÿÿÿ8·Õ’×Í0
+V
+java:S1128":Remove this unused import 'org.example.view.CheckOutForm'.(ø€û8¦é¥ëÍ0

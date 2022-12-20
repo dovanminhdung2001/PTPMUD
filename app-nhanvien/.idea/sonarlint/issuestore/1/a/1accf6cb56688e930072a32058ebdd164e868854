@@ -1,0 +1,40 @@
+
+İ
+java:S1192B"ÆDefine a constant instead of duplicating this literal "SELECT * FROM SYSDBA.TBL_CHECKIN WHERE USER_ID = %d AND  CHECKIN BETWEEN TO_DATE('%s', 'yyyy-mm-dd') AND  TO_DATE('%s', 'yyyy-mm-dd')" 3 times.(áØïû
+}
+java:S1192"`Define a constant instead of duplicating this literal "oracle.jdbc.driver.OracleDriver" 5 times.(ùíÄé8¢·Ì¿Î0
+†
+java:S1319t"pThe return type of this method should be an interface such as "List" rather than the implementation "ArrayList".(†Ã“ˆ
+a
+java:S2259œ"EA "NullPointerException" could be thrown; "checkIn" is nullable here.( °ª´øÿÿÿÿ
+\
+java:S2259”"EA "NullPointerException" could be thrown; "checkIn" is nullable here.(ê¡×©
+b
+java:S2095@"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+b
+java:S2095,"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+b
+java:S2095"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+b
+java:S2095""GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+b
+java:S2095w"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+b
+java:S2095\"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+b
+java:S20955"GUse try-with-resources or close this "Statement" in a "finally" clause.(é°Áµşÿÿÿÿ
+o	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ùßê‚
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ŸëÙÆüÿÿÿÿ
+t	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(ñÑ’±şÿÿÿÿ
+U
+java:S1118":Add a private constructor to hide the implicit public one.(ÔéÌŠúÿÿÿÿ
+C
+java:S4925"-Remove this "Class.forName()", it is useless.(ùíÄé
+J
+java:S4925 "-Remove this "Class.forName()", it is useless.(ùíÄé8ÇË¿Î0
+J
+java:S4925*"-Remove this "Class.forName()", it is useless.(ùíÄé8¼¸Ì¿Î0
+J
+java:S4925>"-Remove this "Class.forName()", it is useless.(ùíÄé8”ÓÍ¿Î0
+J
+java:S4925Z"-Remove this "Class.forName()", it is useless.(ùíÄé8†…Î¿Î0
