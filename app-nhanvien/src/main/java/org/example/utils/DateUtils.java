@@ -9,8 +9,8 @@ import java.util.Date;
 
 public class DateUtils {
     public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-    public static SimpleDateFormat stf = new SimpleDateFormat("hh:mm:ss");
-    public static SimpleDateFormat sdtf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+    public static SimpleDateFormat stf = new SimpleDateFormat("HH:mm:ss");
+    public static SimpleDateFormat sdtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static SimpleDateFormat dateUpFile = new SimpleDateFormat("ddMMyyyyhhmmss");
 
     public static Date now() {

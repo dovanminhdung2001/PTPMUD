@@ -8,14 +8,14 @@ import java.util.ArrayList;
 import oracle.jdbc.driver.OracleDriver;
 
 public class UserService {
-    private static String url = "jdbc:oracle:thin:@localhost:1521:orcl";
-    private static String username = "sysdba";
-    private static String password = "123456789";
+    private static final String url = "jdbc:mysql://localhost:3306/ptpmud";
+    private static final String username = "root";
+    private static final String password = "1";
     private static Connection connection;
 
     public static void create(UserEntity user) throws SQLException {
         connection = DriverManager.getConnection(url, username, password);
-        String sql = String.format("INSERT INTO SYSDBA.TBL_USER (Password, FULL_NAME, PHONE) VALUES ('%s', '%s', '%s')",
+        String sql = String.format("INSERT INTO TBL_USER (Password, FULL_NAME, PHONE) VALUES ('%s', '%s', '%s')",
                 user.getPassword(), user.getFullName(), user.getPhone());
         Statement statement = connection.createStatement();
 
@@ -24,9 +24,8 @@ public class UserService {
     }
 
     public static UserEntity find(Integer id) throws SQLException, ClassNotFoundException {
-        Class.forName("oracle.jdbc.driver.OracleDriver");
         connection = DriverManager.getConnection(url, username, password);
-        String sql = String.format("select * from sysdba.tbl_user where id = %d", id);
+        String sql = String.format("select * from tbl_user where id = %d", id);
         Statement statement = connection.createStatement();
         ResultSet resultSet;
 
@@ -41,9 +40,8 @@ public class UserService {
     }
 
     public static ArrayList<UserEntity> findAll() throws SQLException, ClassNotFoundException {
-        Class.forName("oracle.jdbc.driver.OracleDriver");
         connection = DriverManager.getConnection(url, username, password);
-        String sql =  "select * from sysdba.tbl_user  " ;
+        String sql =  "select * from tbl_user  " ;
         Statement statement = connection.createStatement();
         ResultSet resultSet;
         ArrayList<UserEntity> list = new ArrayList<>();
@@ -62,9 +60,8 @@ public class UserService {
     }
 
     public static Boolean isLogging (Integer id) throws SQLException, ClassNotFoundException {
-        Class.forName("oracle.jdbc.driver.OracleDriver");
         connection = DriverManager.getConnection(url, username, password);
-        String sql = String.format("select * from SYSDBA.TBL_LOGINING where LOGINING = %d", id);
+        String sql = String.format("select * from TBL_LOGINING where LOGINING = %d", id);
         Statement statement = connection.createStatement();
         ResultSet resultSet;
 
@@ -77,7 +74,7 @@ public class UserService {
 
     public static void update (UserEntity user) throws SQLException {
         connection = DriverManager.getConnection(url, username, password);
-        String sql = String.format("update sysdba.tbl_user set password = '%s', full_name = '%s', phone = '%s' where id = %d",
+        String sql = String.format("update  tbl_user set password = '%s', full_name = '%s', phone = '%s' where id = %d",
                 user.getPassword(), user.getFullName(), user.getPhone(), user.getId());
         Statement statement = connection.createStatement();
 
@@ -87,12 +84,12 @@ public class UserService {
 
     public static void delete (Integer id) throws SQLException {
         connection = DriverManager.getConnection(url, username, password);
-        String sql = String.format("delete from sysdba.tbl_logining where logining = %d", id);
+        String sql = String.format("delete from tbl_logining where logining = %d", id);
         Statement statement = connection.createStatement();
         statement.execute(sql);
-        sql = String.format("delete from sysdba.tbl_checkin where user_id = %d", id);
+        sql = String.format("delete from tbl_checkin where user_id = %d", id);
         statement.execute(sql);
-        sql = String.format("delete from sysdba.tbl_user where id = %d", id);
+        sql = String.format("delete from tbl_user where id = %d", id);
         statement.execute(sql);
     }
 }
