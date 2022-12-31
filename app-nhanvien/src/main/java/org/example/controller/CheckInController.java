@@ -26,6 +26,10 @@ public class CheckInController {
             String[] infor = checkInForm.getInfor();
             if ("" == (infor[0]) || "".equals(infor[1])) {
                 JOptionPane.showMessageDialog(null, "please enter id and password");
+            } else if (infor[0].length() > 9) {
+                JOptionPane.showMessageDialog(null, "id too long");
+            } else if (infor[1].length() > 100) {
+                JOptionPane.showMessageDialog(null, "password too long");
             } else {
                 try {
                     UserEntity user = UserService.find(Integer.parseInt(infor[0]));

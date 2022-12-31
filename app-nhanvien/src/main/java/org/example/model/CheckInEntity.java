@@ -1,6 +1,7 @@
 package org.example.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.example.utils.DateUtils;
@@ -11,6 +12,7 @@ import java.time.Instant;
 import java.util.Date;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class CheckInEntity {
@@ -24,6 +26,51 @@ public class CheckInEntity {
     private Date goOut3;
     private Date goIn3;
     private Date checkout;
+    private Long checkinLate;
+    private Long checkoutEarly;
+    private Long goOutAmount;
+    private Long goOutTime;
+    private Long workTime;
+
+    public CheckInEntity(Integer id, Date checkin) throws ParseException {
+        userId = id;
+        this.checkin = checkin;
+        validCheckInLate();
+    }
+
+    public void validCheckInLate () throws ParseException {
+        Long defaultCheckin =  DateUtils.today().getTime() + 17 * 3600 * 500L ;
+        Long checkinAt = checkin.getTime();
+
+        if (checkinAt <= defaultCheckin) {
+            checkinLate = -1L;
+        } else {
+            checkinLate = (checkinAt - defaultCheckin)/ 1000;
+        }
+    }
+
+    public void validCheckoutEarly () throws ParseException {
+        Long defaultCheckout = DateUtils.today().getTime() + 18 * 3600 * 1000L;
+        Long checkoutAt = checkout.getTime();
+
+        if (checkoutAt >= defaultCheckout) {
+            checkoutAt = -1L;
+        } else {
+            checkoutEarly = (defaultCheckout - checkoutAt)/ 1000;
+        }
+    }
+
+    public void validGoOutAmount () {
+        goOutAmount = (long) goInTimes();
+    }
+
+    public void validGoOutTime ()  {
+        goOutTime = totalGoOutMilliSecond()/1000;
+    }
+
+    public void validWorkTime () {
+        workTime = totalWorkMilliSecond()/1000;
+    }
 
     public Integer goOutTimes() {
         if (goOut1 == null) return 0;
@@ -67,7 +114,9 @@ public class CheckInEntity {
         int second = total % 60;
         int minute = (total / 60) % 60;
         int hour = total / 3600;
-        return  String.format("%02d:%02d:%02d", hour, minute, second);
+        return hour > 0
+                ? String.format("%02d:%02d:%02d", hour, minute, second)
+                : String.format("%02d:%02d",  minute, second);
     }
 
     public String totalWorkStr () {
@@ -75,6 +124,8 @@ public class CheckInEntity {
         int second = total % 60;
         int minute = (total / 60) % 60;
         int hour = total / 3600;
-        return  String.format("%02d:%02d:%02d", hour, minute, second);
+        return hour > 0
+                ? String.format("%02d:%02d:%02d", hour, minute, second)
+                : String.format("%02d:%02d",  minute, second);
     }
 }
