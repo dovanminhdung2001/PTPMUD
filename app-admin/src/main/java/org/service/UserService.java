@@ -57,6 +57,21 @@ public class UserService {
         return list;
     }
 
+    public static ArrayList<Integer> findAllId() throws SQLException {
+        connection = DriverManager.getConnection(url, username, password);
+        String sql =  "select id from tbl_user  " ;
+        Statement statement = connection.createStatement();
+        ResultSet resultSet;
+        ArrayList<Integer> list = new ArrayList();
+
+        statement.execute(sql);
+        resultSet = statement.getResultSet();
+        while (resultSet.next()) {
+            list.add(resultSet.getInt(1));
+        }
+        return list;
+    }
+
     public static Boolean isLogging (Integer id) throws SQLException, ClassNotFoundException {
         connection = DriverManager.getConnection(url, username, password);
         String sql = String.format("select * from TBL_LOGINING where LOGINING = %d", id);
