@@ -37,7 +37,6 @@ public class ManageCheckinForm extends JFrame {
     public JTable table = new JTable(tableModel);
     public ManageCheckinForm() throws HeadlessException, SQLException {
         this.setTitle("Manage checkin");
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setSize(1280, 600);
         this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - this.getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getSize().height) / 2);
 
