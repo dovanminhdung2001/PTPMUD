@@ -62,10 +62,13 @@ public class ManageCheckinForm extends JFrame {
     }
 
     public FilterCheckinReq getFilterCheckinRequest() {
+        String from = fromTxt.getText().equals("yyyy-MM-dd") ? "" : fromTxt.getText();
+        String to = toTxt.getText().equals("yyyy-MM-dd") ? "" : toTxt.getText();
+
         return new FilterCheckinReq(
-            fromTxt.getText(),
-            toTxt.getText(),
-            (Integer) idCbb.getSelectedItem()
+            from,
+            to,
+            idCbb.getSelectedItem() == null ? "" : String.valueOf(idCbb.getSelectedItem())
         );
     }
 
@@ -82,23 +85,6 @@ public class ManageCheckinForm extends JFrame {
     }
 
     private void setPlaceHolder() {
-        fromTxt.setForeground(Color.GRAY);
-        fromTxt.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (fromTxt.getText().equals("yyyy-MM-dd")) {
-                    fromTxt.setText("");
-                    fromTxt.setForeground(Color.BLACK);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (fromTxt.getText().equals("") || fromTxt.getText() == null) {
-                    fromTxt.setForeground(Color.GRAY);
-                    fromTxt.setText("yyyy-MM-dd");
-                }
-            }
-        });
         toTxt.setForeground(Color.GRAY);
         toTxt.addFocusListener(new FocusListener() {
             @Override
@@ -113,6 +99,23 @@ public class ManageCheckinForm extends JFrame {
                 if (toTxt.getText().equals("") || toTxt.getText() == null) {
                     toTxt.setForeground(Color.GRAY);
                     toTxt.setText("yyyy-MM-dd");
+                }
+            }
+        });
+        fromTxt.setForeground(Color.GRAY);
+        fromTxt.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (fromTxt.getText().equals("yyyy-MM-dd")) {
+                    fromTxt.setText("");
+                    fromTxt.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (fromTxt.getText().equals("") || fromTxt.getText() == null) {
+                    fromTxt.setForeground(Color.GRAY);
+                    fromTxt.setText("yyyy-MM-dd");
                 }
             }
         });

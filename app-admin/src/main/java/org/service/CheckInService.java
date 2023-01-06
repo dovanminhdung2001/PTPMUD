@@ -2,6 +2,8 @@ package org.service;
 
 import org.model.CheckInEntity;
 import org.model.UserEntity;
+import org.model.dto.CheckInDTO;
+import org.model.req.FilterCheckinReq;
 import org.utils.DateUtils;
 
 import java.sql.*;
@@ -9,62 +11,13 @@ import java.text.ParseException;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class CheckInService {
     private static final String url = "jdbc:mysql://localhost:3306/ptpmud";
     private static final String username = "root";
     private static final String password = "1";
     private static Connection connection;
-
-    public static void checkIn (UserEntity user) throws SQLException, ParseException {
-        connection = DriverManager.getConnection(url, username, password);
-        Statement statement = connection.createStatement();
-        CheckInEntity checkIn = new CheckInEntity(user.getId(), DateUtils.now());
-        checkIn.validCheckInLate();
-        String sql = String.format("INSERT INTO TBL_CHECKIN (USER_ID, CHECKIN, checkin_late, go_out_amount) VALUES (%d,  '%s', %d, %d)",
-                checkIn.getUserId(),
-                DateUtils.sdtf.format(checkIn.getCheckin()),
-                checkIn.getCheckinLate(),
-                0
-        );
-        statement.execute(sql);
-        statement.execute(String.format("INSERT INTO TBL_LOGINING values (%d)", user.getId()));
-    }
-
-    public static void goOut (Integer userId) throws SQLException, ParseException , ClassNotFoundException {
-        connection = DriverManager.getConnection(url, username, password);
-        Statement statement = connection.createStatement();
-        Long goutOutAmount = getGoOutAmount(userId) + 1;
-        String sql = String.format("update tbl_checkin set %s =  '%s', go_out_amount = %d where user_id = %d and CHECKIN BETWEEN  '%s'  AND  '%s' ",
-                "go_out" + goutOutAmount, DateUtils.nowStr(), goutOutAmount, userId, DateUtils.todayStr(), DateUtils.tomorrowStr()
-        );
-        statement.execute(sql);
-    }
-
-    public static void goIn (Integer userId) throws SQLException, ParseException, ClassNotFoundException {
-        connection = DriverManager.getConnection(url, username, password);
-        Statement statement = connection.createStatement();
-        String sql = String.format("update tbl_checkin set go_in%d =  '%s'  where user_id = %d and CHECKIN BETWEEN '%s' AND '%s' ",
-                goInTimes(userId) + 1, DateUtils.nowStr(), userId, DateUtils.todayStr(), DateUtils.tomorrowStr()
-        );
-        statement.execute(sql);
-    }
-
-    public static void checkOut (Integer userId) throws SQLException, ParseException, ClassNotFoundException {
-        connection = DriverManager.getConnection(url, username, password);
-        Statement statement = connection.createStatement();
-        CheckInEntity checkIn = findByUserIdAndCheckInToday(userId);
-        checkIn.setCheckout(DateUtils.now());
-        checkIn.validCheckoutEarly();
-        checkIn.validGoOutTime();
-        checkIn.validWorkTime();
-        String sql = String.format(
-                "update tbl_checkin set checkout = '%s', checkout_early = %d, go_out_time = %d, work_time = %d where user_id = %d and CHECKIN BETWEEN '%s' AND '%s' ",
-                 DateUtils.sdtf.format(checkIn.getCheckout()), checkIn.getCheckoutEarly(), checkIn.getGoOutTime(), checkIn.getWorkTime(), userId, DateUtils.todayStr(), DateUtils.tomorrowStr()
-        );
-        statement.execute(sql);
-        statement.execute(String.format("Delete from TBL_LOGINING where logining = %d", userId));
-    }
 
     public static CheckInEntity findByUserIdAndCheckIn (Integer userId, Date checkIn) throws SQLException, ClassNotFoundException {
         connection = DriverManager.getConnection(url, username, password);
@@ -129,49 +82,77 @@ public class CheckInService {
                 : null;
     }
 
-    public static ArrayList<CheckInEntity> findByUserIdAndCheckInBetween (Integer userId, Date fromDate, Date toDate) throws SQLException {
-        ArrayList<CheckInEntity> list = new ArrayList<>();
+    public static List<CheckInDTO> findByUserIdAndCheckInBetween (FilterCheckinReq req) throws SQLException, ParseException {
         connection = DriverManager.getConnection(url, username, password);
         Statement statement = connection.createStatement();
-        ResultSet resultSet;
-        toDate = Date.from(toDate.toInstant().minus(-1, ChronoUnit.DAYS));
-        String sql = String.format("SELECT * FROM TBL_CHECKIN WHERE USER_ID = %d AND  CHECKIN BETWEEN '%s' AND '%s' ",
-                userId, DateUtils.sdf.format(fromDate), DateUtils.sdf.format(toDate)
-        );
+        String sql;
 
+        if (req.getFrom().equals("") && req.getTo().equals("") && req.getId().equals("")) {
+            sql = String.format("select tu.full_name , tc.* from tbl_user tu, tbl_checkin tc where tu.id = tc.user_id and tc.checkin > '%s' and tc.checkin < '%s'",
+                    DateUtils.todayStr(), DateUtils.tomorrowStr()
+            );
+            return listDto(statement, sql);
+        }
+
+        if (!req.getFrom().equals("") && !req.getTo().equals("")) {
+            sql = req.getId().equals("")
+                    ? String.format("select tu.full_name , tc.* from tbl_user tu, tbl_checkin tc where tu.id = tc.user_id and tc.checkin > '%s' and tc.checkin < '%s'",
+                            req.getFrom(), req.getTo()
+                    )
+                    : String.format("select tu.full_name , tc.* from tbl_user tu, tbl_checkin tc where tu.id = tc.user_id and tc.checkin > '%s' and tc.checkin < '%s1' and tu.id = %s",
+                            req.getFrom(), req.getTo(), req.getId()
+                    );
+            return listDto(statement, sql);
+        } else {
+            sql = String.format("select tu.full_name , tc.* from tbl_user tu, tbl_checkin tc where tu.id = tc.user_id and tu.id = %s", req.getId());
+            return listDto(statement, sql);
+        }
+    }
+
+    private static List<CheckInDTO> listDto  (Statement statement, String sql) throws SQLException {
+        ArrayList<CheckInDTO> list = new ArrayList<>();
+        ResultSet resultSet;
         statement.execute(sql);
         resultSet = statement.getResultSet();
         while (resultSet.next()) {
-            list.add(new CheckInEntity(
-                    resultSet.getInt(1),
+            CheckInEntity checkIn = new CheckInEntity(
                     resultSet.getInt(2),
-                    resultSet.getTimestamp(3)== null ? null : new Date(resultSet.getTimestamp(3).getTime()),
+                    resultSet.getInt(3),
                     resultSet.getTimestamp(4)== null ? null : new Date(resultSet.getTimestamp(4).getTime()),
                     resultSet.getTimestamp(5)== null ? null : new Date(resultSet.getTimestamp(5).getTime()),
                     resultSet.getTimestamp(6)== null ? null : new Date(resultSet.getTimestamp(6).getTime()),
                     resultSet.getTimestamp(7)== null ? null : new Date(resultSet.getTimestamp(7).getTime()),
                     resultSet.getTimestamp(8)== null ? null : new Date(resultSet.getTimestamp(8).getTime()),
                     resultSet.getTimestamp(9)== null ? null : new Date(resultSet.getTimestamp(9).getTime()),
-                    resultSet.getTimestamp(10)== null ? null :new Date(resultSet.getTimestamp(10).getTime()),
-                    resultSet.getLong(11),
+                    resultSet.getTimestamp(10)== null ? null : new Date(resultSet.getTimestamp(10).getTime()),
+                    resultSet.getTimestamp(11)== null ? null : new Date(resultSet.getTimestamp(11).getTime()),
                     resultSet.getLong(12),
                     resultSet.getLong(13),
                     resultSet.getLong(14),
-                    resultSet.getLong(15)
-            ));
+                    resultSet.getLong(15),
+                    resultSet.getLong(16)
+            );
+            list.add(
+                    new CheckInDTO(
+                            checkIn.getUserId(),
+                            resultSet.getString(1),
+                            DateUtils.sdtf.format(checkIn.getCheckin()),
+                            checkIn.getGoOut1() == null ? "" : DateUtils.stf.format(checkIn.getGoOut1()),
+                            checkIn.getGoIn1() == null ? "" : DateUtils.stf.format(checkIn.getGoIn1()),
+                            checkIn.getGoOut2() == null ? "" : DateUtils.stf.format(checkIn.getGoOut2()),
+                            checkIn.getGoIn2() == null ? "" : DateUtils.stf.format(checkIn.getGoIn2()),
+                            checkIn.getGoOut3() == null ? "" : DateUtils.stf.format(checkIn.getGoOut3()),
+                            checkIn.getGoIn3() == null ? "" : DateUtils.stf.format(checkIn.getGoIn3()),
+                            checkIn.getCheckout() == null ? "" : DateUtils.sdtf.format(checkIn.getCheckout()),
+                            DateUtils.secondToHms(checkIn.getCheckinLate()),
+                            DateUtils.secondToHms(checkIn.getCheckoutEarly()),
+                            checkIn.goOutTimes(),
+                            checkIn.totalGoOutStr(),
+                            checkIn.totalWorkStr()
+                    )
+            );
         }
         return list;
     }
 
-    public static Long getGoOutAmount (Integer userId) throws SQLException, ParseException, ClassNotFoundException {
-        return findByUserIdAndCheckIn(userId, DateUtils.today()).getGoOutAmount();
-    }
-
-    public static Integer goInTimes (Integer userId) throws SQLException, ParseException, ClassNotFoundException {
-        CheckInEntity checkIn = findByUserIdAndCheckIn(userId, DateUtils.today());
-        if (checkIn.getGoIn1() == null) return 0;
-        if (checkIn.getGoIn2() == null) return 1;
-        if (checkIn.getGoIn3() == null) return 2;
-        return 3;
-    }
 }

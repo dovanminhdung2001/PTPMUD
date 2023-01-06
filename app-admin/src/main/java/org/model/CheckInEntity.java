@@ -114,7 +114,7 @@ public class CheckInEntity {
         int hour = total / 3600;
         return hour > 0
                 ? String.format("%02d:%02d:%02d", hour, minute, second)
-                : String.format("%02d:%02d",  minute, second);
+                : String.format("     " + "%02d:%02d",  minute, second);
     }
 
     public String totalWorkStr () {
@@ -124,6 +124,6 @@ public class CheckInEntity {
         int hour = total / 3600;
         return hour > 0
                 ? String.format("%02d:%02d:%02d", hour, minute, second)
-                : String.format("%02d:%02d",  minute, second);
+                : String.format("     " + "%02d:%02d",  minute, second);
     }
 }
