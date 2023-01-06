@@ -1,9 +1,11 @@
 package org.service;
 
 import org.model.UserEntity;
+import org.model.req.FindUserReq;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserService {
     private static final String url = "jdbc:mysql://localhost:3306/ptpmud";
@@ -40,6 +42,29 @@ public class UserService {
     public static ArrayList<UserEntity> findAll() throws SQLException, ClassNotFoundException {
         connection = DriverManager.getConnection(url, username, password);
         String sql =  "select * from tbl_user  " ;
+        Statement statement = connection.createStatement();
+        ResultSet resultSet;
+        ArrayList<UserEntity> list = new ArrayList();
+
+        statement.execute(sql);
+        resultSet = statement.getResultSet();
+        while (resultSet.next()) {
+            list.add(new UserEntity(
+                    resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+            ));
+        }
+        return list;
+    }
+
+    public static List<UserEntity> findUsers(FindUserReq req) throws SQLException {
+        connection = DriverManager.getConnection(url, username, password);
+        String sql = "select * from tbl_user where id like '%" + req.getId() + "%' " +
+                "and full_name like '%" + req.getName() +"%' " +
+                "and phone like '%" + req.getPhone() + "%'";
+
         Statement statement = connection.createStatement();
         ResultSet resultSet;
         ArrayList<UserEntity> list = new ArrayList();
