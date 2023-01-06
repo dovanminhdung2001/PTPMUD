@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 
-public class ChangeUserForm extends JFrame {
+public class UpdateUserForm extends JFrame {
     private JPanel panelCenter = new JPanel(new GridLayout(4, 1, 10, 10));
     private JPanel panelLeft = new JPanel(new GridLayout(4, 1, 10, 10));
     private JPanel panelBottom = new JPanel(new FlowLayout());
@@ -21,7 +21,7 @@ public class ChangeUserForm extends JFrame {
     private JTextField phoneTxt = (JTextField) panelCenter.add("", new JTextField());
     private JButton changeBtn = (JButton) panelBottom.add("", new JButton("Change"));
 
-    public ChangeUserForm(UserEntity user) throws HeadlessException {
+    public UpdateUserForm(UserEntity user) throws HeadlessException {
         this.setTitle("Change user");
         this.setSize(300, 230);
         this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - this.getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getSize().height) / 2);
@@ -44,14 +44,14 @@ public class ChangeUserForm extends JFrame {
     public UserEntity getInfor() {
 
         return new UserEntity(
-                null,
+                Integer.valueOf(idTxt.getText()),
                 passwordTxt.getText(),
                 fullNameTxt.getText(),
                 phoneTxt.getText()
         );
     }
 
-    public void changeListener (ActionListener listener) {
+    public void updateListener (ActionListener listener) {
         changeBtn.addActionListener(listener);
     }
 

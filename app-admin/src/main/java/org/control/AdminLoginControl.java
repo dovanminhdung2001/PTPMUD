@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 public class AdminLoginControl {
     AdminLoginForm adminLoginForm = new AdminLoginForm();
@@ -25,15 +26,27 @@ public class AdminLoginControl {
         @Override
         public void actionPerformed(ActionEvent e) {
             AdminEntity req = adminLoginForm.getInfor();
-            if(validData(req)) {
+            if (validData(req)) {
                 new ManageUserControl();
                 adminLoginForm.dispatchEvent(new WindowEvent(adminLoginForm, WindowEvent.WINDOW_CLOSING));
             }
         }
 
-        private boolean validData(AdminEntity req) {
-            if (req.getUsername().equals("") || req.getPassword().equals("" )) {
+        private boolean validData(AdminEntity req) throws SQLException {
+            if (req.getUsername().equals("") || req.getPassword().equals("")) {
                 JOptionPane.showMessageDialog(null, "Please username and password");
+                return false;
+            }
+            if (req.getUsername().length() > 100) {
+                JOptionPane.showMessageDialog(null, "Too long username");
+                return false;
+            }
+            if (req.getPassword().length() > 100) {
+                JOptionPane.showMessageDialog(null, "Too long password");
+                return false;
+            }
+            if (AdminService.find(req) == null) {
+                JOptionPane.showMessageDialog(null, "Wrong username - password");
                 return false;
             }
             return true;

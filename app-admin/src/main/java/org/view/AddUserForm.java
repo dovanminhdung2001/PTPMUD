@@ -42,11 +42,11 @@ public class AddUserForm extends JFrame{
         );
     }
 
-    public void addListener (ActionListener listener) {
+    public void addListener(ActionListener listener) {
         addBtn.addActionListener(listener);
     }
 
-    public void addExitListener(WindowAdapter windowAdapter) {
+    public void exitListener(WindowAdapter windowAdapter) {
         this.addWindowListener(windowAdapter);
     }
 }

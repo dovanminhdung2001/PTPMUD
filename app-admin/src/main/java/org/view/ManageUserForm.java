@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class ManageUserForm extends JFrame {
-    private String[] column = {"Id", "Password", "Full name", "Phone"};
+    private String[] column = {"", "Id", "Password", "Full name", "Phone"};
     private JPanel panelCenter = new JPanel(new GridLayout(1,1));
     private JPanel panelBottom = new JPanel(new GridLayout(1, 5));
     public DefaultTableModel tableModel = new DefaultTableModel(column, 0) {
@@ -35,6 +35,14 @@ public class ManageUserForm extends JFrame {
         this.add(panelBottom, BorderLayout.SOUTH);
 
         this.setVisible(true);
+    }
+
+    public void setAllBtn(boolean status) {
+        addBtn.setEnabled(status);
+        updateBtn.setEnabled(status);
+        deleteBtn.setEnabled(status);
+        reCheckinBtn.setEnabled(status);
+        mangeCheckInBtn.setEnabled(status);
     }
 
     public void addListener (ActionListener listener) {

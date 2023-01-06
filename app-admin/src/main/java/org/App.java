@@ -1,7 +1,6 @@
 package org;
 
-import org.control.AdminLoginControl;
-import org.control.ChangePasswordControl;
+import org.control.*;
 import org.utils.DateUtils;
 import org.view.*;
 
@@ -13,9 +12,9 @@ import java.text.ParseException;
  *
  */
 public class App {
-    public static void main( String[] args ) throws ParseException, SQLException {
-//        new AdminLoginForm();
-//            new ChangePasswordControl();
+    public static void main( String[] args ) throws ParseException, SQLException, ClassNotFoundException {
+//        new ManageUserControl();
+//        new AddUserControl();
         new AdminLoginControl();
     }
 }

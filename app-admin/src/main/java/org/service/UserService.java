@@ -105,4 +105,11 @@ public class UserService {
         sql = String.format("delete from tbl_user where id = %d", id);
         statement.execute(sql);
     }
+
+    public static int reCheckin (Integer id) throws SQLException {
+        connection = DriverManager.getConnection(url, username, password);
+        String sql = String.format("delete from tbl_logining where logining = %d", id);
+        Statement statement = connection.createStatement();
+        return statement.executeUpdate(sql);
+    }
 }
