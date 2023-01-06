@@ -35,7 +35,7 @@ public class AddUserControl {
                 JOptionPane.showMessageDialog(null, "Too long phone");
                 return;
             }
-            if (req.getPhone().length() < 9) {
+            if (req.getPhone().length() < 10) {
                 JOptionPane.showMessageDialog(null, "Too short phone");
                 return;
             }

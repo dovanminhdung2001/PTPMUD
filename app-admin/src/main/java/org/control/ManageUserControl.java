@@ -117,8 +117,8 @@ public class ManageUserControl {
                     return;
                 }
                 if (checkIn.getCheckout() == null) {
-                    int row = UserService.reCheckin(userId);
-                    JOptionPane.showMessageDialog(null, String.valueOf(row));
+                    UserService.reCheckin(userId);
+                    JOptionPane.showMessageDialog(null, "Allow user re-checkin success");
                     return;
                 }
                 JOptionPane.showMessageDialog(null, "User already checkout");

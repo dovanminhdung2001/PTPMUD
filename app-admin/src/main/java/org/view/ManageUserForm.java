@@ -3,6 +3,7 @@ package org.view;
 import org.model.req.FindUserReq;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -43,6 +44,15 @@ public class ManageUserForm extends JFrame {
 
         panelTop.add(new JLabel(),6);
         panelTop.add(new JLabel(),8);
+
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
+        table.getColumnModel().getColumn(0).setCellRenderer( centerRenderer );
+        DefaultTableCellRenderer rightRenderer = new DefaultTableCellRenderer();
+        rightRenderer.setHorizontalAlignment(SwingConstants.RIGHT);
+        for (int i = 1; i < column.length; i++) {
+            table.getColumnModel().getColumn(i).setCellRenderer( rightRenderer );
+        }
 
         JScrollPane jScrollPane = new JScrollPane(table);
         panelCenter.add(jScrollPane);
