@@ -17,5 +17,6 @@ public class App {
 //        new AddUserControl();
 //        new AdminLoginControl();
         new ManageCheckinControl();
+//        System.out.println(true ^ true);
     }
 }
