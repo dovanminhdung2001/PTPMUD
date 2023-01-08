@@ -11,16 +11,16 @@ public class AddUserForm extends JFrame{
     private JPanel panelCenter = new JPanel(new GridLayout(3, 1, 10, 10));
     private JPanel panelLeft = new JPanel(new GridLayout(3, 1, 10, 10));
     private JPanel panelBottom = new JPanel(new FlowLayout());
-    private JLabel passwordLbl = (JLabel) panelLeft.add("", new JLabel("Password" ));
-    private JLabel fullNameLbl = (JLabel) panelLeft.add("", new JLabel("Full name" + " "));
-    private JLabel phoneLbl = (JLabel)  panelLeft.add("", new JLabel("Phone"));
+    private JLabel passwordLbl = (JLabel) panelLeft.add("", new JLabel("Mật khẩu" ));
+    private JLabel fullNameLbl = (JLabel) panelLeft.add("", new JLabel("Tên đầy đủ" + " "));
+    private JLabel phoneLbl = (JLabel)  panelLeft.add("", new JLabel("SĐT"));
     private JTextField passwordTxt = (JTextField) panelCenter.add("", new JTextField());
     private JTextField fullNameTxt = (JTextField) panelCenter.add("", new JTextField());
     private JTextField phoneTxt = (JTextField) panelCenter.add("", new JTextField());
-    private JButton addBtn = (JButton) panelBottom.add("", new JButton("Add"));
+    private JButton addBtn = (JButton) panelBottom.add("", new JButton("Thêm"));
 
     public AddUserForm() throws HeadlessException {
-        this.setTitle("Add user");
+        this.setTitle("Thêm nhân viên");
         this.setSize(300, 200);
         this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - this.getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getSize().height) / 2);
 

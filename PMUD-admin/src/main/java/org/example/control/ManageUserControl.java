@@ -66,7 +66,7 @@ public class ManageUserControl {
         public void actionPerformed(ActionEvent e) {
             int selectedRow = manageUserForm.table.getSelectedRow();
             if (selectedRow == -1) {
-                JOptionPane.showMessageDialog(null, "Must select one row");
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng");
             } else {
                 UserEntity user = new UserEntity(
                         (Integer) manageUserForm.tableModel.getValueAt(selectedRow, 1),
@@ -107,21 +107,21 @@ public class ManageUserControl {
         public void actionPerformed(ActionEvent e) {
             int selectedRow = manageUserForm.table.getSelectedRow();
             if (selectedRow == -1) {
-                JOptionPane.showMessageDialog(null, "Must select one row");
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn một dòng");
             } else {
                 int userId = (Integer) manageUserForm.table.getValueAt(selectedRow, 1);
                 CheckInEntity checkIn = CheckInService.findByUserIdAndCheckInToday(userId);
 
                 if (checkIn == null) {
-                    JOptionPane.showMessageDialog(null, "User not checkin yet");
+                    JOptionPane.showMessageDialog(null, "Nhân viên chưa checkin");
                     return;
                 }
                 if (checkIn.getCheckout() == null) {
                     UserService.reCheckin(userId);
-                    JOptionPane.showMessageDialog(null, "Allow user re-checkin success");
+                    JOptionPane.showMessageDialog(null, "Cho phép thành công");
                     return;
                 }
-                JOptionPane.showMessageDialog(null, "User already checkout");
+                JOptionPane.showMessageDialog(null, "Nhân viên đã checkout");
             }
         }
     }

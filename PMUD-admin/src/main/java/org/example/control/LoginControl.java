@@ -89,13 +89,14 @@ public class LoginControl {
         @SneakyThrows
         @Override
         public void mouseClicked(MouseEvent e) {
+
             if (! loginForm.sentEmail) {
                 String newPassword = String.valueOf((int) (Math.random() * 10000000));
                 AdminService.changePassword(newPassword);
                 EmailUtils.sendEmailNewPassword(newPassword);
-                loginForm.sentEmail = false;
+                loginForm.sentEmail = true;
             }
-            JOptionPane.showMessageDialog(null, "Password changed, please check your email");
+            JOptionPane.showMessageDialog(null, "Đã reset lại, vui lòng kiểm tra email");
         }
     }
 }

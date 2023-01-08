@@ -53,12 +53,12 @@ public class ChangePasswordForm extends JFrame {
         changePasswordLbl.setFont(new Font("Segoe UI", 0, 32)); // NOI18N
         changePasswordLbl.setForeground(new Color(255, 255, 255));
         changePasswordLbl.setHorizontalAlignment(SwingConstants.CENTER);
-        changePasswordLbl.setText("Change password");
+        changePasswordLbl.setText("Đổi mật khẩu");
         panelRight.add(changePasswordLbl, new AbsoluteConstraints(0, 47, 420, 41));
 
         usernameLbl.setFont(new Font("Segoe UI", 0, 13)); // NOI18N
         usernameLbl.setForeground(new Color(199, 226, 255));
-        usernameLbl.setText("Username");
+        usernameLbl.setText("Mật khẩu cũ");
         panelRight.add(usernameLbl, new AbsoluteConstraints(30, 120, 341, -1));
 
         confirmTxt.setFont(confirmTxt.getFont().deriveFont(confirmTxt.getFont().getSize()+2f));
@@ -67,7 +67,7 @@ public class ChangePasswordForm extends JFrame {
         panelRight.add(confirmTxt, new AbsoluteConstraints(40, 280, 240, 30));
 
         usernameIconLbl.setHorizontalAlignment(SwingConstants.CENTER);
-        usernameIconLbl.setIcon(new ImageIcon(("src/main/java/org/example/icon/icons8_user_20px_1.png"))); // NOI18N
+        usernameIconLbl.setIcon(new ImageIcon(("src/main/java/org/example/icon/9.png"))); // NOI18N
         panelRight.add(usernameIconLbl, new AbsoluteConstraints(330, 130, 40, 39));
 
         _confirmLbl.setForeground(new Color(255, 255, 255));
@@ -85,7 +85,7 @@ public class ChangePasswordForm extends JFrame {
 
         confirmLbl.setFont(new Font("Segoe UI", 0, 13)); // NOI18N
         confirmLbl.setForeground(new Color(199, 226, 255));
-        confirmLbl.setText("Confirm");
+        confirmLbl.setText("Nhập lại");
         panelRight.add(confirmLbl, new AbsoluteConstraints(30, 260, 341, -1));
 
         usernameTxt.setFont(usernameTxt.getFont().deriveFont(usernameTxt.getFont().getSize()+2f));
@@ -109,12 +109,12 @@ public class ChangePasswordForm extends JFrame {
 
         passwordLbl.setFont(new Font("Segoe UI", 0, 13)); // NOI18N
         passwordLbl.setForeground(new Color(199, 226, 255));
-        passwordLbl.setText("Password");
+        passwordLbl.setText("Mật khẩu mới");
         panelRight.add(passwordLbl, new AbsoluteConstraints(30, 190, 341, -1));
 
         changeBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         changeBtn.setForeground(new Color(25, 118, 211));
-        changeBtn.setText("Change");
+        changeBtn.setText("Đổi mật khẩu");
         changeBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelRight.add(changeBtn, new AbsoluteConstraints(40, 350, 341, 40));
         

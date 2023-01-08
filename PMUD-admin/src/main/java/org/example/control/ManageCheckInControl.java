@@ -65,7 +65,7 @@ public class ManageCheckInControl {
             FilterCheckinReq req = manageCheckinForm.getFilterCheckinRequest();
 
             if (req.getFrom().equals("") ^ req.getTo().equals("")) {
-                JOptionPane.showMessageDialog(null, "Please enter both of from date and to date");
+                JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ hai trường");
                 return;
             }
 
@@ -81,7 +81,7 @@ public class ManageCheckInControl {
                 clearData();
                 refillData(req);
             } catch (Exception exception) {
-                JOptionPane.showMessageDialog(null, "Input date invalid format");
+                JOptionPane.showMessageDialog(null, "Ngày không đúng định dạng");
                 exception.printStackTrace();
             }
         }

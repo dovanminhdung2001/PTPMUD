@@ -11,18 +11,18 @@ public class UpdateUserForm extends JFrame {
     private JPanel panelCenter = new JPanel(new GridLayout(4, 1, 10, 10));
     private JPanel panelLeft = new JPanel(new GridLayout(4, 1, 10, 10));
     private JPanel panelBottom = new JPanel(new FlowLayout());
-    private JLabel idLbl = (JLabel) panelLeft.add("", new JLabel("Id"));
-    private JLabel passwordLbl = (JLabel) panelLeft.add("", new JLabel("Password" ));
-    private JLabel fullNameLbl = (JLabel) panelLeft.add("", new JLabel("Full name" + " "));
-    private JLabel phoneLbl = (JLabel)  panelLeft.add("", new JLabel("Phone"));
+    private JLabel idLbl = (JLabel) panelLeft.add("", new JLabel("Mã NV"));
+    private JLabel passwordLbl = (JLabel) panelLeft.add("", new JLabel("Mật khẩu" + " " ));
+    private JLabel fullNameLbl = (JLabel) panelLeft.add("", new JLabel("Tên"));
+    private JLabel phoneLbl = (JLabel)  panelLeft.add("", new JLabel("SĐT"));
     private JTextField idTxt = (JTextField) panelCenter.add("", new JTextField());
     private JTextField passwordTxt = (JTextField) panelCenter.add("", new JTextField());
     private JTextField fullNameTxt = (JTextField) panelCenter.add("", new JTextField());
     private JTextField phoneTxt = (JTextField) panelCenter.add("", new JTextField());
-    private JButton changeBtn = (JButton) panelBottom.add("", new JButton("Change"));
+    private JButton changeBtn = (JButton) panelBottom.add("", new JButton("Cập nhật"));
 
     public UpdateUserForm(UserEntity user) throws HeadlessException {
-        this.setTitle("Change user");
+        this.setTitle("Cập nhật nhân viên");
         this.setSize(300, 230);
         this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - this.getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getSize().height) / 2);
 

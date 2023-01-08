@@ -10,5 +10,6 @@ public class App {
     public static void main( String[] args ) throws SQLException, ParseException {
 //        new ManageCheckInControl();
         new LoginControl();
+//        new ChangePasswordControl();
     }
 }

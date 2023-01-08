@@ -174,4 +174,10 @@ public class CheckInService {
         if (checkIn.getGoIn3() == null) return 2;
         return 3;
     }
+
+    public static void reCheckIn(Integer userId) throws SQLException {
+        connection = DriverManager.getConnection(url, username, password);
+        Statement statement = connection.createStatement();
+        statement.execute(String.format("INSERT INTO TBL_LOGINING values (%d)", userId));
+    }
 }
