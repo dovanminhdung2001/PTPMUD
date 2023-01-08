@@ -21,11 +21,11 @@ public class UpdateUserControl {
         public void actionPerformed(ActionEvent e) {
             UserEntity req = updateUserForm.getInfor();
             if (req.getPassword().equals("") || req.getFullName().equals("") || req.getPhone().equals("")) {
-                JOptionPane.showMessageDialog(null, "Please enter all required information");
+                JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ các trường");
                 return;
             }
             if (req.getPassword().length() > 100) {
-                JOptionPane.showMessageDialog(null, "Too long password");
+                JOptionPane.showMessageDialog(null, "Mật khẩu quá dài");
                 return;
             }
             if (req.getFullName().length() > 100) {

@@ -48,7 +48,7 @@ public class ResultCheckOutForm extends JFrame {
 
          checkinAt1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
          checkinAt1.setForeground(new java.awt.Color(255, 255, 255));
-         checkinAt1.setText("Checkin At:");
+         checkinAt1.setText("Checkin:");
          checkinAtPanel.add(checkinAt1, new AbsoluteConstraints(18, 14, -1, -1));
 
          checkinAtLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -63,7 +63,7 @@ public class ResultCheckOutForm extends JFrame {
 
          checkoutAt1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
          checkoutAt1.setForeground(new java.awt.Color(255, 255, 255));
-         checkoutAt1.setText("Checkout At:");
+         checkoutAt1.setText("Checkout:");
          checkoutAtPanel.add(checkoutAt1, new AbsoluteConstraints(18, 14, -1, -1));
 
          checkoutAtLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -78,7 +78,7 @@ public class ResultCheckOutForm extends JFrame {
 
          totalWorkTime1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
          totalWorkTime1.setForeground(new java.awt.Color(255, 255, 255));
-         totalWorkTime1.setText("Total Work Time:");
+         totalWorkTime1.setText("Thời gian làm:");
          totalWorkTimePanel.add(totalWorkTime1, new AbsoluteConstraints(18, 14, -1, -1));
 
          totalWorkTimeLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -93,7 +93,7 @@ public class ResultCheckOutForm extends JFrame {
 
          totalGoOutTime1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
          totalGoOutTime1.setForeground(new java.awt.Color(255, 255, 255));
-         totalGoOutTime1.setText("Total go out time:");
+         totalGoOutTime1.setText("Thời gian ra ngoài:");
          totalGoOutTimePanel.add(totalGoOutTime1, new AbsoluteConstraints(18, 14, -1, -1));
 
          totalGoOutTimeLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -108,12 +108,12 @@ public class ResultCheckOutForm extends JFrame {
 
          goOut1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
          goOut1.setForeground(new java.awt.Color(255, 255, 255));
-         goOut1.setText("Go out ");
+         goOut1.setText("Số lần ra");
          goOutPanel.add(goOut1, new AbsoluteConstraints(18, 14, -1, 50));
 
          goOutTimesLbl.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
          goOutTimesLbl.setForeground(new java.awt.Color(255, 255, 255));
-         goOutTimesLbl.setText("times:");
+         goOutTimesLbl.setText("ngoài:");
          goOutPanel.add(goOutTimesLbl, new AbsoluteConstraints(20, 70, -1, -1));
 
          time1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -133,7 +133,7 @@ public class ResultCheckOutForm extends JFrame {
 
          checkinLate1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
          checkinLate1.setForeground(new java.awt.Color(255, 255, 255));
-         checkinLate1.setText("Checkin Late:");
+         checkinLate1.setText("Checkin muộn:");
          checkinLatePanel.add(checkinLate1, new AbsoluteConstraints(18, 14, -1, -1));
 
          centerPanel.add(checkinLatePanel, new AbsoluteConstraints(230, 150, 290, 134));
@@ -143,7 +143,7 @@ public class ResultCheckOutForm extends JFrame {
 
          CheckoutEarly1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
          CheckoutEarly1.setForeground(new java.awt.Color(255, 255, 255));
-         CheckoutEarly1.setText("Check out Early:");
+         CheckoutEarly1.setText("Checkout sớm:");
          CheckoutEarlyPanel.add(CheckoutEarly1, new AbsoluteConstraints(18, 14, -1, -1));
 
          CheckoutEarlyLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -159,7 +159,7 @@ public class ResultCheckOutForm extends JFrame {
 
          id1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
          id1.setForeground(new java.awt.Color(255, 255, 255));
-         id1.setText("Id:");
+         id1.setText("Mã:");
          idPanel.add(id1, new AbsoluteConstraints(18, 14, -1, -1));
 
          idLbl.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -169,9 +169,10 @@ public class ResultCheckOutForm extends JFrame {
 
          centerPanel.add(idPanel, new AbsoluteConstraints(0, 10, 220, 130));
 
-         getContentPane().add(centerPanel, new AbsoluteConstraints(0, 10, -1, 460));
+         getContentPane().add(centerPanel, new AbsoluteConstraints(0, 5, -1, 460));
 
-         setSize(870, 468);
+         setSize(850, 468);
+         setLocationRelativeTo(null);
          setVisible(true);
    }
 }

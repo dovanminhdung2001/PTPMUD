@@ -29,7 +29,7 @@ public class LoginForm extends JFrame {
     public JLabel forgetLbl = new JLabel();
     public Boolean sentEmail = false;
     public LoginForm() throws HeadlessException {
-        setTitle("Login");
+        setTitle("Đăng nhập");
         setUndecorated(true);
         getContentPane().setLayout(new AbsoluteLayout());
 
@@ -51,12 +51,12 @@ public class LoginForm extends JFrame {
         loginLbl.setFont(new Font("Segoe UI", 0, 32)); // NOI18N
         loginLbl.setForeground(new Color(255, 255, 255));
         loginLbl.setHorizontalAlignment(SwingConstants.CENTER);
-        loginLbl.setText("Login");
+        loginLbl.setText("Đăng nhập");
         panelLoginRight.add(loginLbl, new AbsoluteConstraints(0, 47, 420, 41));
 
         usernameLbl.setFont(new Font("Segoe UI", 0, 13)); // NOI18N
         usernameLbl.setForeground(new Color(199, 226, 255));
-        usernameLbl.setText("Username");
+        usernameLbl.setText("Tài khoản");
         panelLoginRight.add(usernameLbl, new AbsoluteConstraints(34, 123, 341, -1));
 
         usernameTxt.setFont(usernameTxt.getFont().deriveFont(usernameTxt.getFont().getSize()+2f));
@@ -75,7 +75,7 @@ public class LoginForm extends JFrame {
 
         passwordLbl.setFont(new Font("Segoe UI", 0, 13)); // NOI18N
         passwordLbl.setForeground(new Color(199, 226, 255));
-        passwordLbl.setText("Password");
+        passwordLbl.setText("Mật khẩu");
         panelLoginRight.add(passwordLbl, new AbsoluteConstraints(34, 192, 341, -1));
 
         passwordTxt.setFont(passwordTxt.getFont().deriveFont(passwordTxt.getFont().getSize()+2f));
@@ -100,13 +100,13 @@ public class LoginForm extends JFrame {
 
         loginBtn.setFont(new Font("Segoe UI", 1, 14)); // NOI18N
         loginBtn.setForeground(new Color(25, 118, 211));
-        loginBtn.setText("LOGIN");
+        loginBtn.setText("Đăng nhập");
         loginBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelLoginRight.add(loginBtn, new AbsoluteConstraints(34, 306, 341, 40));
 
         forgetLbl.setFont(new Font("Segoe UI", 2, 12)); // NOI18N
         forgetLbl.setForeground(new Color(255, 255, 255));
-        forgetLbl.setText("Forget password ?");
+        forgetLbl.setText("Quên mật khẩu ?");
         forgetLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelLoginRight.add(forgetLbl, new AbsoluteConstraints(34, 247, 120, 41));
 

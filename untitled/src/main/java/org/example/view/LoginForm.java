@@ -28,7 +28,7 @@ public class LoginForm extends JFrame {
     public JLabel userIconLbl = new JLabel();
     public JTextField usernameTxt = new JTextField();
     public LoginForm() throws HeadlessException {
-        setTitle("Login");
+        setTitle("Đăng nhập");
         setUndecorated(true);
         getContentPane().setLayout(new AbsoluteLayout());
 
@@ -50,16 +50,15 @@ public class LoginForm extends JFrame {
         loginLbl.setFont(new java.awt.Font("Segoe UI", 0, 32)); // NOI18N
         loginLbl.setForeground(new java.awt.Color(255, 255, 255));
         loginLbl.setHorizontalAlignment(SwingConstants.CENTER);
-        loginLbl.setText("Login");
+        loginLbl.setText("Đăng nhập");
         panelLoginRight.add(loginLbl, new AbsoluteConstraints(0, 47, 420, 41));
 
         idLbl.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         idLbl.setForeground(new java.awt.Color(199, 226, 255));
-        idLbl.setText("Id");
+        idLbl.setText("Mã nhân viên");
         panelLoginRight.add(idLbl, new AbsoluteConstraints(34, 123, 341, -1));
 
         usernameTxt.setFont(usernameTxt.getFont().deriveFont(usernameTxt.getFont().getSize()+2f));
-//        usernameTxt.setForeground(new java.awt.Color(255, 255, 255));
         usernameTxt.setBorder(null);
 
         panelLoginRight.add(usernameTxt, new AbsoluteConstraints(39, 140, 240, 30));
@@ -70,11 +69,11 @@ public class LoginForm extends JFrame {
 
         userIconLbl.setHorizontalAlignment(SwingConstants.CENTER);
         userIconLbl.setIcon(new ImageIcon(("src/main/java/org/example/icon/icons8_user_20px_1.png"))); // NOI18N
-        panelLoginRight.add(userIconLbl, new AbsoluteConstraints(335, 147, 40, 39));
+        panelLoginRight.add(userIconLbl, new AbsoluteConstraints(335, 132, 40, 39));
 
         passwordLbl.setFont(new java.awt.Font("Segoe UI", 0, 13)); // NOI18N
         passwordLbl.setForeground(new java.awt.Color(199, 226, 255));
-        passwordLbl.setText("Password");
+        passwordLbl.setText("Mật khẩu");
         panelLoginRight.add(passwordLbl, new AbsoluteConstraints(34, 192, 341, -1));
 
         passwordTxt.setFont(passwordTxt.getFont().deriveFont(passwordTxt.getFont().getSize()+2f));
@@ -90,16 +89,16 @@ public class LoginForm extends JFrame {
         seePasswordIconLbl.setHorizontalAlignment(SwingConstants.CENTER);
         seePasswordIconLbl.setIcon(new ImageIcon(("src/main/java/org/example/icon/icons8_invisible_20px_1.png"))); // NOI18N
         seePasswordIconLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelLoginRight.add(seePasswordIconLbl, new AbsoluteConstraints(335, 216, 40, 40));
+        panelLoginRight.add(seePasswordIconLbl, new AbsoluteConstraints(335, 198, 40, 40));
 
         unSeePasswordIconLbl.setHorizontalAlignment(SwingConstants.CENTER);
         unSeePasswordIconLbl.setIcon(new ImageIcon(("src/main/java/org/example/icon/icons8_eye_20px_1.png"))); // NOI18N
         unSeePasswordIconLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        panelLoginRight.add(unSeePasswordIconLbl, new AbsoluteConstraints(335, 216, 40, 40));
+        panelLoginRight.add(unSeePasswordIconLbl, new AbsoluteConstraints(335, 200, 40, 40));
 
         loginBtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         loginBtn.setForeground(new java.awt.Color(25, 118, 211));
-        loginBtn.setText("LOGIN");
+        loginBtn.setText("Đăng nhập");
         loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         panelLoginRight.add(loginBtn, new AbsoluteConstraints(34, 306, 341, 40));
 

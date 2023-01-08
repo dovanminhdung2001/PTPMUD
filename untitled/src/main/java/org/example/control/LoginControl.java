@@ -53,27 +53,30 @@ public class LoginControl {
         public void actionPerformed(ActionEvent e) {
             LoginReq req = loginForm.getInfor();
             if (req.getId().equals("") || req.getPassword().equals("")) {
-                JOptionPane.showMessageDialog(null, "please enter id and password");
-            } else if (req.getId().length() > 10) {
-                JOptionPane.showMessageDialog(null, "id too long");
+                JOptionPane.showMessageDialog(null, "Vui lòng nhập đủ các trường");
+            } else if (req.getId().length() > 9) {
+                JOptionPane.showMessageDialog(null, "Mã nhân viên quá dài");
             } else if (req.getPassword().length() > 100) {
-                JOptionPane.showMessageDialog(null, "password too long");
+                JOptionPane.showMessageDialog(null, "Mật khẩu quá dài");
             } else {
                 try {
                     UserEntity user = UserService.find(Integer.parseInt(req.getId()));
                     if (user == null || !user.getPassword().equals(req.getPassword())) {
-                        JOptionPane.showMessageDialog(null, "id or password is wrong");
+                        JOptionPane.showMessageDialog(null, "Sai mã nhân viên hoặc mật khẩu");
                     } else if (UserService.isLogging(user.getId())) {
-                        JOptionPane.showMessageDialog(null, "this account is logging in other device");
+                        JOptionPane.showMessageDialog(null, "Tài khoản đang đăng nhập ở thiết bị khác");
                     } else {
-                        if (CheckInService.findByUserIdAndCheckInToday(user.getId()) == null)
+                        if (CheckInService.findByUserIdAndCheckInToday(user.getId()) == null) {
                             CheckInService.checkIn(user);
+                        } else  {
+                            CheckInService.reCheckIn(user.getId());
+                        }
                         new CheckOutController(user);
                         loginForm.dispatchEvent(new WindowEvent(loginForm, WindowEvent.WINDOW_CLOSING));
                     }
                 } catch (Exception exception) {
                     System.out.println(exception);
-                    JOptionPane.showMessageDialog(null, "id must be integer");
+                    JOptionPane.showMessageDialog(null, "Mã nhân viên phải là số nguyên");
                 }
             }
         }

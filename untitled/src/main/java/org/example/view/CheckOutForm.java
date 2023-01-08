@@ -13,10 +13,10 @@ import java.util.Date;
 public class CheckOutForm extends JFrame {
     public JPanel panelCenter = new JPanel(new GridLayout(2,1));
     public JPanel panelBottom = new JPanel(new FlowLayout());
-    public JLabel inforLbl = (JLabel) panelCenter.add("", new JLabel(" " + "id: "));
-    public JLabel checkinAtLbl = (JLabel) panelCenter.add("", new JLabel(" " + "Checkin at: "));
-    public JButton goOutBtn = (JButton) panelBottom.add("", new JButton("go out"));
-    public JButton goInBtn = (JButton) panelBottom.add("", new JButton("go in"));
+    public JLabel inforLbl = (JLabel) panelCenter.add("", new JLabel(" " + "Mã NV: "));
+    public JLabel checkinAtLbl = (JLabel) panelCenter.add("", new JLabel(" " + "Checkin: "));
+    public JButton goOutBtn = (JButton) panelBottom.add("", new JButton("Ra ngoài"));
+    public JButton goInBtn = (JButton) panelBottom.add("", new JButton("Đi vào"));
     public JButton checkoutBtn = (JButton) panelBottom.add("", new JButton("check out"));
 
     public CheckOutForm() throws HeadlessException {
@@ -33,11 +33,11 @@ public class CheckOutForm extends JFrame {
     }
 
     public void setInforLbl (UserEntity user) {
-        inforLbl.setText(" " + "id: " + user.getId() + "    " + user.getFullName());
+        inforLbl.setText(" " + user.getFullName() +  "    " + "Mã NV : " + user.getId() );
     }
 
     public void setCheckinAtLbl (Date checkin) throws ParseException {
-        checkinAtLbl.setText(" " + "Checkin at: " + DateUtils.sdtf.format(checkin));
+        checkinAtLbl.setText(" " + "Checkin : " + DateUtils.sdtf.format(checkin));
     }
 
     public void setGoOutBtn(Boolean status) {

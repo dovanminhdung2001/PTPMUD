@@ -24,7 +24,7 @@ public class ManageCheckinForm extends JFrame {
     private JButton exportBtn = new JButton();
     private JButton findBtn = new JButton();
     private JLabel fromLbl = new JLabel();
-    private JTextField fromTxt = new JTextField();
+    private JTextField fromTxt = new JTextField("yyyy-MM-dd");
     private JLabel idLbl = new JLabel();
     private JScrollPane jScrollPane1 = new JScrollPane();
     private JLabel logOutLbl = new JLabel();
@@ -32,7 +32,7 @@ public class ManageCheckinForm extends JFrame {
     private JLabel manageUserLbl = new JLabel();
     private JLabel myDataLbl = new JLabel();
     private String[] column = {
-            "User id", "Name", "Checkin ", "Checkout", "Checkin late", "Checkout early", "Go out turns", "Go out time", "Work time"
+            "Mã NV", "Tên", "Checkin ", "Checkout", "Checkin muộn", "Checkout sớm", "Lần ra ngoài", "Thời gian ra ngoài", "Thời gian làm việc"
     };
     public DefaultTableModel tableModel = new DefaultTableModel(column, 0) {
         @Override
@@ -42,7 +42,7 @@ public class ManageCheckinForm extends JFrame {
     };
     public JTable table = new JTable(tableModel);
     private JLabel toLbl = new JLabel();
-    private JTextField toTxt = new JTextField();
+    private JTextField toTxt = new JTextField("yyyy-MM-dd");
     private ArrayList<Integer> listId = UserService.findAllId();
     private JComboBox<Integer> idCbb = new JComboBox<>();
 
@@ -67,34 +67,34 @@ public class ManageCheckinForm extends JFrame {
         manageUserLbl.setFont(new Font("SansSerif", 0, 18)); // NOI18N
         manageUserLbl.setForeground(new Color(255, 255, 255));
         manageUserLbl.setIcon(new ImageIcon(("src/main/java/org/example/icon/8.png"))); // NOI18N
-        manageUserLbl.setText("Manage user");
+        manageUserLbl.setText("Quản lý nhân viên");
         manageUserLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelLeft.add(manageUserLbl, new AbsoluteConstraints(22, 105, 172, -1));
 
         manageCheckinLbl.setFont(new Font("SansSerif", 0, 18)); // NOI18N
         manageCheckinLbl.setForeground(new Color(255, 255, 255));
         manageCheckinLbl.setIcon(new ImageIcon(("src/main/java/org/example/icon/1.png"))); // NOI18N
-        manageCheckinLbl.setText("Manage checkin");
+        manageCheckinLbl.setText("Quản lý checkin");
         manageCheckinLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelLeft.add(manageCheckinLbl, new AbsoluteConstraints(6, 141, 188, -1));
 
         logOutLbl.setFont(new Font("SansSerif", 0, 18)); // NOI18N
         logOutLbl.setForeground(new Color(255, 255, 255));
         logOutLbl.setIcon(new ImageIcon(("src/main/java/org/example/icon/9.png"))); // NOI18N
-        logOutLbl.setText("Log out");
+        logOutLbl.setText("Đăng xuất");
         logOutLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelLeft.add(logOutLbl, new AbsoluteConstraints(22, 344, 172, -1));
 
         changePasswordLbl.setFont(new Font("SansSerif", 0, 18)); // NOI18N
         changePasswordLbl.setForeground(new Color(255, 255, 255));
         changePasswordLbl.setIcon(new ImageIcon(("src/main/java/org/example/icon/2.png"))); // NOI18N
-        changePasswordLbl.setText("Change password");
+        changePasswordLbl.setText("Đổi mật khẩu");
         changePasswordLbl.setCursor(new Cursor(Cursor.HAND_CURSOR));
         panelLeft.add(changePasswordLbl, new AbsoluteConstraints(22, 302, 172, -1));
 
         myDataLbl.setFont(new Font("SansSerif", 1, 18)); // NOI18N
         myDataLbl.setForeground(new Color(255, 255, 255));
-        myDataLbl.setText("My data");
+        myDataLbl.setText("Cá nhân");
         panelLeft.add(myDataLbl, new AbsoluteConstraints(22, 229, 172, -1));
 
         table.setFocusable(false);
@@ -134,7 +134,7 @@ public class ManageCheckinForm extends JFrame {
         panelRight.add(findBtn, new AbsoluteConstraints(700, 15, -1, 40));
 
         exportBtn.setIcon(new ImageIcon(("src/main/java/org/example/icon/export-big.png"))); // NOI18N
-        exportBtn.setText("Export");
+        exportBtn.setText("Xuất excel");
         panelRight.add(exportBtn, new AbsoluteConstraints(778, 15, -1, -1));
 
         getContentPane().add(panelLeft, new AbsoluteConstraints(0, 0, 200, 1010));
@@ -154,6 +154,17 @@ public class ManageCheckinForm extends JFrame {
                 to,
                 idCbb.getSelectedItem() == null ? "" : String.valueOf(idCbb.getSelectedItem())
         );
+    }
+
+    public void setAllBtn(boolean status) {
+        logOutLbl.setEnabled(status);
+        changePasswordLbl.setEnabled(status);
+        findBtn.setEnabled(status);
+        manageUserLbl.setEnabled(status);
+    }
+
+    public void setEnableExportBtn(boolean status) {
+        exportBtn.setEnabled(status);
     }
 
     public void findListener (ActionListener listener) {
@@ -210,5 +221,19 @@ public class ManageCheckinForm extends JFrame {
                 }
             }
         });
+    }
+
+    public void changePasswordListener(MouseAdapter adapter) {
+        changePasswordLbl.addMouseListener(adapter);
+    }
+
+    public void disableExportListener(MouseAdapter adapter) {
+        idCbb.addMouseListener(adapter);
+        fromTxt.addMouseListener(adapter);
+        toTxt.addMouseListener(adapter);
+    }
+
+    public void enableExportListener(ActionListener listener) {
+        findBtn.addActionListener(listener);
     }
 }

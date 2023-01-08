@@ -31,7 +31,7 @@ public class AddUserControl {
                 JOptionPane.showMessageDialog(null, "Too long full name");
                 return;
             }
-            if (req.getPhone().length() > 13) {
+            if (req.getPhone().length() > 12) {
                 JOptionPane.showMessageDialog(null, "Too long phone");
                 return;
             }
@@ -40,7 +40,7 @@ public class AddUserControl {
                 return;
             }
             try {
-                Integer.parseInt(req.getPhone());
+                Long.parseLong(req.getPhone());
                 UserService.create(req);
                 JOptionPane.showMessageDialog(null, "Add success");
             } catch (Exception e2) {
