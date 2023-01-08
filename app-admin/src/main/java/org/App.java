@@ -15,6 +15,8 @@ public class App {
     public static void main( String[] args ) throws ParseException, SQLException, ClassNotFoundException {
 //        new ManageUserControl();
 //        new AddUserControl();
-        new AdminLoginControl();
+//        new AdminLoginControl();
+//        new ManageCheckinControl();
+//        System.out.println(true ^ true);
     }
 }

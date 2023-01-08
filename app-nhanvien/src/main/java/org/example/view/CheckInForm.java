@@ -20,6 +20,8 @@ public class CheckInForm extends JFrame{
     public CheckInForm() throws HeadlessException {
         this.setTitle("User Checkin");
         this.setSize(300, 180);
+        System.out.println("with: " + Toolkit.getDefaultToolkit().getScreenSize().width);
+        System.out.println("height: " + Toolkit.getDefaultToolkit().getScreenSize().height);
         this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - this.getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getSize().height) / 2);
 
         panelCenter.add(new JLabel("Welcome back to work"), 0);

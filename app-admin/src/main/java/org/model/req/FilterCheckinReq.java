@@ -8,5 +8,5 @@ import lombok.Data;
 public class FilterCheckinReq {
     private String from;
     private String to;
-    private Integer id;
+    private String id;
 }

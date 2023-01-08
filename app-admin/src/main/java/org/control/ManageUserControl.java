@@ -3,7 +3,7 @@ package org.control;
 import lombok.SneakyThrows;
 import org.model.CheckInEntity;
 import org.model.UserEntity;
-import org.service.AdminService;
+import org.model.req.FindUserReq;
 import org.service.CheckInService;
 import org.service.UserService;
 import org.view.ManageUserForm;
@@ -27,6 +27,7 @@ public class ManageUserControl {
         manageUserForm.deleteListener(new DeleteListener());
         manageUserForm.reCheckinListener(new ReCheckinListener());
         manageUserForm.manageCheckinListener(new ManageCheckinListener());
+        manageUserForm.findListener(new FindListener());
     }
 
     public void refillData() throws ClassNotFoundException, SQLException {
@@ -115,8 +116,8 @@ public class ManageUserControl {
                     return;
                 }
                 if (checkIn.getCheckout() == null) {
-                    int row = UserService.reCheckin(userId);
-                    JOptionPane.showMessageDialog(null, String.valueOf(row));
+                    UserService.reCheckin(userId);
+                    JOptionPane.showMessageDialog(null, "Allow user re-checkin success");
                     return;
                 }
                 JOptionPane.showMessageDialog(null, "User already checkout");
@@ -125,9 +126,35 @@ public class ManageUserControl {
     }
 
     class ManageCheckinListener implements ActionListener {
+        @SneakyThrows
         @Override
         public void actionPerformed(ActionEvent e) {
+            new ManageCheckinControl();
+            manageUserForm.dispatchEvent(new WindowEvent(manageUserForm, WindowEvent.WINDOW_CLOSING));
+         }
+    }
 
+    class FindListener implements ActionListener {
+        @SneakyThrows
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            clearData();
+            refillData(manageUserForm.findUser());
+        }
+
+        private void refillData(FindUserReq req) throws SQLException {
+            listUser = UserService.findUsers(req);
+            int i=0;
+            for (UserEntity u : listUser) {
+                Object[] data = {
+                        ++i,
+                        u.getId(),
+                        u.getPassword(),
+                        u.getFullName(),
+                        u.getPhone()
+                };
+                manageUserForm.tableModel.addRow(data);
+            }
         }
     }
 

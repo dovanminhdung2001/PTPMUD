@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ManageCheckinForm extends JFrame {
-    private String[] column = {"User id", "Checkin", "Go out 1", "Go in 1", "Go out 2", "Go in 2", "Go out 3", "Go in 3", "Checkout", "Checkin late", "Checkout early", "Go out turns", "Go out time", "Work time"};
+    private String[] column = {"User id", "Name", "Checkin", "Go out 1", "Go in 1", "Go out 2", "Go in 2", "Go out 3", "Go in 3", "Checkout", "Checkin late", "Checkout early", "Go out turns", "Go out time", "Work time"};
     private JPanel panelTop =  new JPanel(new GridLayout(2, 8, 10, 10));
     private JPanel panelBottom = new JPanel(new GridLayout(1, 5));
     private JPanel panelCenter = new JPanel(new GridLayout(1,1));
@@ -37,9 +37,7 @@ public class ManageCheckinForm extends JFrame {
     public JTable table = new JTable(tableModel);
     public ManageCheckinForm() throws HeadlessException, SQLException {
         this.setTitle("Manage checkin");
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setSize(1280, 600);
-        this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - this.getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getSize().height) / 2);
+        this.setSize(Toolkit.getDefaultToolkit().getScreenSize().width, Toolkit.getDefaultToolkit().getScreenSize().height);
 
         panelTop.add(new JLabel(), 0);
         panelTop.add(new JLabel(), 4);
@@ -64,10 +62,13 @@ public class ManageCheckinForm extends JFrame {
     }
 
     public FilterCheckinReq getFilterCheckinRequest() {
+        String from = fromTxt.getText().equals("yyyy-MM-dd") ? "" : fromTxt.getText();
+        String to = toTxt.getText().equals("yyyy-MM-dd") ? "" : toTxt.getText();
+
         return new FilterCheckinReq(
-            fromTxt.getText(),
-            toTxt.getText(),
-            (Integer) idCbb.getSelectedItem()
+            from,
+            to,
+            idCbb.getSelectedItem() == null ? "" : String.valueOf(idCbb.getSelectedItem())
         );
     }
 
@@ -84,23 +85,6 @@ public class ManageCheckinForm extends JFrame {
     }
 
     private void setPlaceHolder() {
-        fromTxt.setForeground(Color.GRAY);
-        fromTxt.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (fromTxt.getText().equals("yyyy-MM-dd")) {
-                    fromTxt.setText("");
-                    fromTxt.setForeground(Color.BLACK);
-                }
-            }
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (fromTxt.getText().equals("") || fromTxt.getText() == null) {
-                    fromTxt.setForeground(Color.GRAY);
-                    fromTxt.setText("yyyy-MM-dd");
-                }
-            }
-        });
         toTxt.setForeground(Color.GRAY);
         toTxt.addFocusListener(new FocusListener() {
             @Override
@@ -115,6 +99,23 @@ public class ManageCheckinForm extends JFrame {
                 if (toTxt.getText().equals("") || toTxt.getText() == null) {
                     toTxt.setForeground(Color.GRAY);
                     toTxt.setText("yyyy-MM-dd");
+                }
+            }
+        });
+        fromTxt.setForeground(Color.GRAY);
+        fromTxt.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (fromTxt.getText().equals("yyyy-MM-dd")) {
+                    fromTxt.setText("");
+                    fromTxt.setForeground(Color.BLACK);
+                }
+            }
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (fromTxt.getText().equals("") || fromTxt.getText() == null) {
+                    fromTxt.setForeground(Color.GRAY);
+                    fromTxt.setText("yyyy-MM-dd");
                 }
             }
         });
