@@ -156,6 +156,17 @@ public class ManageCheckinForm extends JFrame {
         );
     }
 
+    public void setAllBtn(boolean status) {
+        logOutLbl.setEnabled(status);
+        changePasswordLbl.setEnabled(status);
+        findBtn.setEnabled(status);
+        manageUserLbl.setEnabled(status);
+    }
+
+    public void setEnableExportBtn(boolean status) {
+        exportBtn.setEnabled(status);
+    }
+
     public void findListener (ActionListener listener) {
         findBtn.addActionListener(listener);
     }
@@ -210,5 +221,19 @@ public class ManageCheckinForm extends JFrame {
                 }
             }
         });
+    }
+
+    public void changePasswordListener(MouseAdapter adapter) {
+        changePasswordLbl.addMouseListener(adapter);
+    }
+
+    public void disableExportListener(MouseAdapter adapter) {
+        idCbb.addMouseListener(adapter);
+        fromTxt.addMouseListener(adapter);
+        toTxt.addMouseListener(adapter);
+    }
+
+    public void enableExportListener(ActionListener listener) {
+        findBtn.addActionListener(listener);
     }
 }

@@ -99,9 +99,10 @@ public class CheckInService {
             sql = req.getId().equals("")
                     ? stringBuffer.append("'").toString()
                     : stringBuffer.append("' and tu.id = ").append(req.getId()).toString();
+            sql += " order by tc.checkin , tc.user_id";
             return listDto(statement, sql);
         } else {
-            sql = String.format("select tu.full_name , tc.* from tbl_user tu, tbl_checkin tc where tu.id = tc.user_id and tu.id = %s", req.getId());
+            sql = String.format("select tu.full_name , tc.* from tbl_user tu, tbl_checkin tc where tu.id = tc.user_id and tu.id = %s order by tc.checkin", req.getId());
             return listDto(statement, sql);
         }
     }
