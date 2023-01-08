@@ -75,6 +75,7 @@ public class ManageUserForm extends JFrame {
         reCheckinBtn.setEnabled(status);
         mangeCheckInBtn.setEnabled(status);
         findBtn.setEnabled(status);
+
     }
 
     public void addListener (ActionListener listener) {
