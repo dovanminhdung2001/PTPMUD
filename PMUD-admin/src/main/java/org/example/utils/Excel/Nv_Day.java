@@ -91,7 +91,7 @@ public class Nv_Day {
         row = sheet.createRow(rowIndex + 2);
         cell = row.createCell(0);
         cell.setCellStyle(cellStyle2);
-        cell.setCellValue("Ngày" + req.getFrom());
+        cell.setCellValue("Ngày " + req.getFrom());
     }
 
     private static void writeContent(Sheet sheet, CheckInDTO dto) {

@@ -44,7 +44,7 @@ public class ChangePasswordControl {
                 JOptionPane.showMessageDialog(null, "Đầu vào quá dài");
                 return  ;
             }
-            AdminEntity admin = AdminService.find(new AdminEntity("addz", req.getOldPass()));
+            AdminEntity admin = AdminService.find(new AdminEntity("adminQL", req.getOldPass()));
             if (admin == null) {
                 JOptionPane.showMessageDialog(null, "Sai mật khẩu");
                 return  ;
