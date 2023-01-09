@@ -153,4 +153,44 @@ public class CheckInService {
         return list;
     }
 
+    public static List<CheckInEntity> findByUserIdAndCheckInBetween2 (FilterCheckinReq req) throws SQLException, ParseException {
+        connection = DriverManager.getConnection(url, username, password);
+        Statement statement = connection.createStatement();
+        String sql;
+        StringBuffer stringBuffer = new StringBuffer("select tu.full_name , tc.* from tbl_user tu, tbl_checkin tc where tu.id = tc.user_id and tc.checkin > '");
+        stringBuffer.append(req.getFrom()).append("' and tc.checkin < '"). append(req.getTo());
+        sql = req.getId().equals("")
+                ? stringBuffer.append("'").toString()
+                : stringBuffer.append("' and tu.id = ").append(req.getId()).toString();
+        sql += " order by tc.checkin , tc.user_id";
+        return listDto2(statement, sql);
+    }
+
+    private static List<CheckInEntity> listDto2  (Statement statement, String sql) throws SQLException {
+        ArrayList<CheckInEntity> list = new ArrayList<>();
+        ResultSet resultSet;
+        statement.execute(sql);
+        resultSet = statement.getResultSet();
+        while (resultSet.next()) {
+            CheckInEntity checkIn = new CheckInEntity(
+                    resultSet.getInt(2),
+                    resultSet.getInt(3),
+                    resultSet.getTimestamp(4)== null ? null : new Date(resultSet.getTimestamp(4).getTime()),
+                    resultSet.getTimestamp(5)== null ? null : new Date(resultSet.getTimestamp(5).getTime()),
+                    resultSet.getTimestamp(6)== null ? null : new Date(resultSet.getTimestamp(6).getTime()),
+                    resultSet.getTimestamp(7)== null ? null : new Date(resultSet.getTimestamp(7).getTime()),
+                    resultSet.getTimestamp(8)== null ? null : new Date(resultSet.getTimestamp(8).getTime()),
+                    resultSet.getTimestamp(9)== null ? null : new Date(resultSet.getTimestamp(9).getTime()),
+                    resultSet.getTimestamp(10)== null ? null : new Date(resultSet.getTimestamp(10).getTime()),
+                    resultSet.getTimestamp(11)== null ? null : new Date(resultSet.getTimestamp(11).getTime()),
+                    resultSet.getLong(12),
+                    resultSet.getLong(13),
+                    resultSet.getLong(14),
+                    resultSet.getLong(15),
+                    resultSet.getLong(16)
+            );
+            list.add( checkIn);
+        }
+        return list;
+    }
 }

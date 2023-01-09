@@ -2,11 +2,13 @@ package org.example.control;
 
 import com.mysql.cj.protocol.x.Notice;
 import lombok.SneakyThrows;
+import org.example.model.CheckInEntity;
 import org.example.model.dto.CheckInDTO;
 import org.example.model.req.FilterCheckinReq;
 import org.example.service.CheckInService;
 import org.example.utils.DateUtils;
 import org.example.utils.Excel.Nv_Day;
+import org.example.utils.Excel.Nv_s_Day;
 import org.example.view.ManageCheckinForm;
 
 import javax.swing.*;
@@ -146,20 +148,53 @@ public class ManageCheckInControl {
         @Override
         public void actionPerformed(ActionEvent e) {
             req = manageCheckinForm.getFilterCheckinRequest();
-            req.setFrom(DateUtils.sdf.format(DateUtils.sdf.parse(req.getFrom())));
 
             if (manageCheckinForm.tableModel.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(null, "Không có dữ liệu", "", JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            if (!req.getId().equals("") &&  !req.getFrom().equals("") && !req.getTo().equals("") && findByOneDay(req)) {
+            if (!req.getFrom().equals("")) {
+                req.setFrom(DateUtils.sdf.format(DateUtils.sdf.parse(req.getFrom())));
+            } else {
+                req.setFrom(DateUtils.todayStr());
+            }
+            if (!req.getTo().equals("")) {
+                req.setTo(DateUtils.sdf.format(DateUtils.sdf.parse(req.getTo())));
+            } else {
+                req.setTo(DateUtils.tomorrowStr());
+            }
+
+            if (req.getId().equals("") && findByOneDay(req)) {
+                List<CheckInDTO> list = CheckInService.findByUserIdAndCheckInBetween(req);
+                String filePath = Nv_s_Day.export(req, list);
+                JOptionPane.showMessageDialog(null, "Thành công, xem file tại: " + filePath);
+                return;
+            }
+
+            if (findByOneDay(req)) {
                 CheckInDTO dto = CheckInService.findByUserIdAndCheckInBetween(req).get(0);
                 String filePath = Nv_Day.export(req, dto);
                 JOptionPane.showMessageDialog(null, "Thành công, xem file tại: " + filePath);
                 return;
             }
+
+            if (!findByOneDay(req)) {
+                if (!validReq(req)) {
+                    JOptionPane.showMessageDialog(null, "Khoảng thời gian quá dài", "", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    List<CheckInEntity> list = CheckInService.findByUserIdAndCheckInBetween2(req);
+                    System.out.println(list.size());
+                }
+            }
         }
+    }
+
+    private boolean validReq(FilterCheckinReq req) throws ParseException {
+        Long to = DateUtils.sdf.parse(req.getTo()).getTime() / 1000;
+        Long from = DateUtils.sdf.parse(req.getFrom()).getTime() / 100;
+
+        return  to - from < 3600L * 24 * 365 * 2;
     }
 
     private boolean findByOneDay(FilterCheckinReq req) throws ParseException {

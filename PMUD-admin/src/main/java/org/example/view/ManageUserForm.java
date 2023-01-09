@@ -111,17 +111,17 @@ public class ManageUserForm extends JFrame{
 
         nameLbl.setFont(new Font("SansSerif", 0, 18)); // NOI18N
         nameLbl.setText("Tên");
-        panelRight.add(nameLbl, new AbsoluteConstraints(189, 21, -1, -1));
+        panelRight.add(nameLbl, new AbsoluteConstraints(230, 21, -1, -1));
 
         phoneLbl.setFont(new Font("SansSerif", 0, 18)); // NOI18N
         phoneLbl.setText("SĐT");
-        panelRight.add(phoneLbl, new AbsoluteConstraints(394, 21, -1, -1));
+        panelRight.add(phoneLbl, new AbsoluteConstraints(415, 21, -1, -1));
 
         idTxt.setBorder(null);
-        panelRight.add(idTxt, new AbsoluteConstraints(52, 15, 100, 35));
+        panelRight.add(idTxt, new AbsoluteConstraints(80, 15, 100, 35));
 
         nameTxt.setBorder(null);
-        panelRight.add(nameTxt, new AbsoluteConstraints(254, 15, 100, 35));
+        panelRight.add(nameTxt, new AbsoluteConstraints(275, 15, 100, 35));
 
         phoneTxt.setBorder(null);
         panelRight.add(phoneTxt, new AbsoluteConstraints(464, 15, 100, 35));
