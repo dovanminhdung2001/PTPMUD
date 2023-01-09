@@ -15,7 +15,7 @@ public class Nv_Day {
     private static CellStyle cellStyleFormatNumber = null;
     public static int rowIndex =0;
     public static String export(FilterCheckinReq req, CheckInDTO checkInDTO) {
-        String excelPath = String.valueOf(new StringBuffer("D://BangChamCong_").append(req.getId()).append("_").append(req.getFrom()).append(".xlsx"));
+        String excelPath = String.valueOf(new StringBuffer("D://BangChamCong_").append(req.getId()).append("_").append(req.getFrom()).append(req.getFrom()).append("_").append(DateUtils.dateUpFile()).append(".xlsx").append(".xlsx"));
 
         try {
             Workbook workbook = getWorkbook(excelPath);
