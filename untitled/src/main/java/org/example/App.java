@@ -2,6 +2,7 @@ package org.example;
 
 import org.example.control.LoginControl;
 import org.example.utils.DateUtils;
+import org.example.view.CheckOutForm;
 import org.example.view.LoginForm;
 
 import java.util.Date;
@@ -13,5 +14,6 @@ import java.util.Date;
 public class App {
     public static void main( String[] args )    {
         new LoginControl();
+
     }
 }

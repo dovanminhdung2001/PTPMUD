@@ -37,8 +37,10 @@ public class Nv_s_Day {
             Workbook workbook = getWorkbook(excelPath);
             Sheet sheet = workbook.createSheet("Sheet1");
 
+            rowIndex =0;
             writeHeader(sheet, rowIndex, req);
 
+            rowIndex = 7;
             writeTable(sheet);
 
             writeContent(sheet, listDto);

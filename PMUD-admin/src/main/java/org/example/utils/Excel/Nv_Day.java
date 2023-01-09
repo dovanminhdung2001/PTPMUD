@@ -20,8 +20,10 @@ public class Nv_Day {
         try {
             Workbook workbook = getWorkbook(excelPath);
             Sheet sheet = workbook.createSheet("Sheet1");
-
+            rowIndex =0;
             writeHeader(sheet, rowIndex, req);
+
+            rowIndex = 7;
             writeContent(sheet, checkInDTO);
 
             int numberOfColumn = sheet.getRow(1).getPhysicalNumberOfCells();

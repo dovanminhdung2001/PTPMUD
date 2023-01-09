@@ -102,7 +102,9 @@ public class CheckInService {
             sql += " order by tc.checkin , tc.user_id";
             return listDto(statement, sql);
         } else {
-            sql = String.format("select tu.full_name , tc.* from tbl_user tu, tbl_checkin tc where tu.id = tc.user_id and tu.id = %s order by tc.checkin", req.getId());
+            sql = String.format("select tu.full_name , tc.* from tbl_user tu, tbl_checkin tc where tu.id = tc.user_id and tu.id = %s and tc.checkin > '%s' and tc.checkin < '%s'",
+                    req.getId(), DateUtils.todayStr(), DateUtils.tomorrowStr()
+            );
             return listDto(statement, sql);
         }
     }

@@ -37,13 +37,14 @@ public class ResultCheckOutForm extends JFrame {
     private JLabel totalWorkTimeLbl = new JLabel();
     private JPanel totalWorkTimePanel = new JPanel();
     public ResultCheckOutForm(CheckInEntity checkIn){ 
-
+         setTitle("Kết quả checkout");
          setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
          getContentPane().setLayout(new AbsoluteLayout());
 
          centerPanel.setLayout(new AbsoluteLayout());
 
-         checkinAtPanel.setBackground(new java.awt.Color(159, 121, 238));
+//         checkinAtPanel.setBackground(new java.awt.Color(159, 121, 238));
+         checkinAtPanel.setBackground(new java.awt.Color(0, 191, 255));
          checkinAtPanel.setLayout(new AbsoluteLayout());
 
          checkinAt1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -58,7 +59,8 @@ public class ResultCheckOutForm extends JFrame {
 
          centerPanel.add(checkinAtPanel, new AbsoluteConstraints(230, 10, 290, 130));
 
-         checkoutAtPanel.setBackground(new java.awt.Color(102, 205, 0));
+//         checkoutAtPanel.setBackground(new java.awt.Color(102, 205, 0));
+         checkoutAtPanel.setBackground(new java.awt.Color(0, 191, 255));
          checkoutAtPanel.setLayout(new AbsoluteLayout());
 
          checkoutAt1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -73,7 +75,8 @@ public class ResultCheckOutForm extends JFrame {
 
          centerPanel.add(checkoutAtPanel, new AbsoluteConstraints(530, 10, 300, 130));
 
-         totalWorkTimePanel.setBackground(new java.awt.Color(0, 191, 255));
+//         totalWorkTimePanel.setBackground(new java.awt.Color(0, 191, 255));
+         totalWorkTimePanel.setBackground(new java.awt.Color(224, 102, 225));
          totalWorkTimePanel.setLayout(new AbsoluteLayout());
 
          totalWorkTime1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -103,7 +106,8 @@ public class ResultCheckOutForm extends JFrame {
 
          centerPanel.add(totalGoOutTimePanel, new AbsoluteConstraints(380, 290, 450, 130));
 
-         goOutPanel.setBackground(new java.awt.Color(255, 105, 180));
+//         goOutPanel.setBackground(new java.awt.Color(255, 105, 180));
+         goOutPanel.setBackground(new java.awt.Color(238, 118, 33));
          goOutPanel.setLayout(new AbsoluteLayout());
 
          goOut1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
@@ -138,7 +142,8 @@ public class ResultCheckOutForm extends JFrame {
 
          centerPanel.add(checkinLatePanel, new AbsoluteConstraints(230, 150, 290, 134));
 
-         CheckoutEarlyPanel.setBackground(new java.awt.Color(0, 191, 255));
+//         CheckoutEarlyPanel.setBackground(new java.awt.Color(0, 191, 255));
+         CheckoutEarlyPanel.setBackground(new java.awt.Color(238, 118, 33));
          CheckoutEarlyPanel.setLayout(new AbsoluteLayout());
 
          CheckoutEarly1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N

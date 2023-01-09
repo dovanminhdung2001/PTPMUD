@@ -32,6 +32,7 @@ public class ChangePasswordForm extends JFrame {
     private JButton changeBtn = new JButton();
 
     public ChangePasswordForm() throws HeadlessException {
+        setTitle("Đổi mật khẩu");
         getContentPane().setLayout(new AbsoluteLayout());
         setUndecorated(true);
 

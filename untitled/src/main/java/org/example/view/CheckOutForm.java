@@ -16,15 +16,20 @@ public class CheckOutForm extends JFrame {
     public JLabel inforLbl = (JLabel) panelCenter.add("", new JLabel(" " + "Mã NV: "));
     public JLabel checkinAtLbl = (JLabel) panelCenter.add("", new JLabel(" " + "Checkin: "));
     public JButton goOutBtn = (JButton) panelBottom.add("", new JButton("Ra ngoài"));
-    public JButton goInBtn = (JButton) panelBottom.add("", new JButton("Đi vào"));
+    public JButton goInBtn = (JButton) panelBottom.add("", new JButton("Quay lại"));
     public JButton checkoutBtn = (JButton) panelBottom.add("", new JButton("check out"));
 
     public CheckOutForm() throws HeadlessException {
         this.setTitle("Welcome");
-        this.setSize(280, 150);
+        this.setSize(370, 220);
         this.setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - this.getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - this.getSize().height) / 2);
 
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+
+        goOutBtn.setIcon(new ImageIcon(("src/main/java/org/example/icon/goout.png")));
+        goInBtn.setIcon(new ImageIcon(("src/main/java/org/example/icon/goin.png")));
+        checkoutBtn.setIcon(new ImageIcon(("src/main/java/org/example/icon/checkout.png")));
+        this.setIconImage(new ImageIcon(("src/main/java/org/example/icon/checkoutPanel.png")).getImage());
 
         this.add(panelBottom, BorderLayout.SOUTH);
         this.add(panelCenter, BorderLayout.CENTER);
